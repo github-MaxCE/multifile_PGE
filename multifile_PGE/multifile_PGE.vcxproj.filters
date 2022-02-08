@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="includes">
+      <UniqueIdentifier>{b55b237e-3db2-41ce-93b4-cbd4954d6aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{8b9c9aa8-74f0-4df4-9092-77a206d14e2a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\olcPixel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\olcSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\olcRenderable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\olcDecal.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\olcResourcePack.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\olcPixelGameEngine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="includes\olcPixelGameEngine.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPixel.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcSprite.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcRenderable.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcDecal.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcAux.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcInput.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcV2D.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcResourcePack.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcRenderer.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPlatform.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcRenderer_OGL10.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcRenderer_OGL33.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPlatform_WINAPI.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPlatform_LINUX.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPlatform_GLUT.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPlatform_EMSCRIPTEN.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcImageLoader_GDI.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcImageLoader.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcImageLoader_LIBPNG.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcImageLoader_STB.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\olcPGEX.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
