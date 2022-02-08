@@ -18,18 +18,6 @@ namespace olc
 	// | Auxilliary components internal to engine                                     |
 	// O------------------------------------------------------------------------------O
 
-	struct DecalInstance
-	{
-		olc::Decal* decal = nullptr;
-		std::vector<olc::vf2d> pos;
-		std::vector<olc::vf2d> uv;
-		std::vector<float> w;
-		std::vector<olc::Pixel> tint;
-		olc::DecalMode mode = olc::DecalMode::NORMAL;
-		olc::DecalStructure structure = olc::DecalStructure::FAN;
-		uint32_t points = 0;
-	};
-
 	struct LayerDesc
 	{
 		olc::vf2d vOffset = { 0, 0 };

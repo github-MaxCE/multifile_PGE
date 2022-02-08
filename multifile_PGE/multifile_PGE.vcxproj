@@ -146,27 +146,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="includes\olcPixelGameEngine.h" />
-    <ClInclude Include="src\olcAux.h" />
-    <ClInclude Include="src\olcDecal.h" />
-    <ClInclude Include="src\olcImageLoader.h" />
-    <ClInclude Include="src\olcImageLoader_GDI.h" />
-    <ClInclude Include="src\olcImageLoader_LIBPNG.h" />
-    <ClInclude Include="src\olcImageLoader_STB.h" />
-    <ClInclude Include="src\olcInput.h" />
-    <ClInclude Include="src\olcPGEX.h" />
-    <ClInclude Include="src\olcPixel.h" />
-    <ClInclude Include="src\olcPlatform.h" />
-    <ClInclude Include="src\olcPlatform_EMSCRIPTEN.h" />
-    <ClInclude Include="src\olcPlatform_GLUT.h" />
-    <ClInclude Include="src\olcPlatform_LINUX.h" />
-    <ClInclude Include="src\olcPlatform_WINAPI.h" />
-    <ClInclude Include="src\olcRenderer.h" />
-    <ClInclude Include="src\olcRenderable.h" />
-    <ClInclude Include="src\olcRenderer_OGL10.h" />
-    <ClInclude Include="src\olcRenderer_OGL33.h" />
-    <ClInclude Include="src\olcSprite.h" />
-    <ClInclude Include="src\olcV2D.h" />
-    <ClInclude Include="src\olcResourcePack.h" />
+    <ClInclude Include="includes\olcAux.h" />
+    <ClInclude Include="includes\olcDecal.h" />
+    <ClInclude Include="includes\olcImageLoader.h" />
+    <ClInclude Include="includes\olcImageLoader_GDI.h" />
+    <ClInclude Include="includes\olcImageLoader_LIBPNG.h" />
+    <ClInclude Include="includes\olcImageLoader_STB.h" />
+    <ClInclude Include="includes\olcInput.h" />
+    <ClInclude Include="includes\olcPGEX.h" />
+    <ClInclude Include="includes\olcPixel.h" />
+    <ClInclude Include="includes\olcPlatform.h" />
+    <ClInclude Include="includes\olcPlatform_EMSCRIPTEN.h" />
+    <ClInclude Include="includes\olcPlatform_GLUT.h" />
+    <ClInclude Include="includes\olcPlatform_LINUX.h" />
+    <ClInclude Include="includes\olcPlatform_WINAPI.h" />
+    <ClInclude Include="includes\olcRenderer.h" />
+    <ClInclude Include="includes\olcRenderable.h" />
+    <ClInclude Include="includes\olcRenderer_OGL10.h" />
+    <ClInclude Include="includes\olcRenderer_OGL33.h" />
+    <ClInclude Include="includes\olcSprite.h" />
+    <ClInclude Include="includes\olcV2D.h" />
+    <ClInclude Include="includes\olcResourcePack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

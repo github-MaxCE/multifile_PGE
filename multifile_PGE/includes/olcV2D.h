@@ -1,5 +1,9 @@
 #pragma once
 #include <ostream>
+#pragma push_macro("min")
+#undef min
+#pragma push_macro("max")
+#undef max
 
 namespace olc
 {
@@ -92,3 +96,5 @@ namespace olc
 	typedef v2d_generic<float> vf2d;
 	typedef v2d_generic<double> vd2d;
 }
+#pragma pop_macro("min")
+#pragma pop_macro("max")

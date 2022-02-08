@@ -35,67 +35,67 @@
     <ClInclude Include="includes\olcPixelGameEngine.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPixel.h">
+    <ClInclude Include="includes\olcPixel.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcSprite.h">
+    <ClInclude Include="includes\olcSprite.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcRenderable.h">
+    <ClInclude Include="includes\olcRenderable.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcDecal.h">
+    <ClInclude Include="includes\olcDecal.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcAux.h">
+    <ClInclude Include="includes\olcAux.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcInput.h">
+    <ClInclude Include="includes\olcInput.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcV2D.h">
+    <ClInclude Include="includes\olcV2D.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcResourcePack.h">
+    <ClInclude Include="includes\olcResourcePack.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcRenderer.h">
+    <ClInclude Include="includes\olcRenderer.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPlatform.h">
+    <ClInclude Include="includes\olcPlatform.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcRenderer_OGL10.h">
+    <ClInclude Include="includes\olcRenderer_OGL10.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcRenderer_OGL33.h">
+    <ClInclude Include="includes\olcRenderer_OGL33.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPlatform_WINAPI.h">
+    <ClInclude Include="includes\olcPlatform_WINAPI.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPlatform_LINUX.h">
+    <ClInclude Include="includes\olcPlatform_LINUX.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPlatform_GLUT.h">
+    <ClInclude Include="includes\olcPlatform_GLUT.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPlatform_EMSCRIPTEN.h">
+    <ClInclude Include="includes\olcPlatform_EMSCRIPTEN.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcImageLoader_GDI.h">
+    <ClInclude Include="includes\olcImageLoader_GDI.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcImageLoader.h">
+    <ClInclude Include="includes\olcImageLoader.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcImageLoader_LIBPNG.h">
+    <ClInclude Include="includes\olcImageLoader_LIBPNG.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcImageLoader_STB.h">
+    <ClInclude Include="includes\olcImageLoader_STB.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="src\olcPGEX.h">
+    <ClInclude Include="includes\olcPGEX.h">
       <Filter>includes</Filter>
     </ClInclude>
   </ItemGroup>
