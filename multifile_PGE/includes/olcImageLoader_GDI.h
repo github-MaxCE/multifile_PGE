@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCIMAGELOADER_GDI_H
+#define OLCIMAGELOADER_GDI_H
 #include "olcImageLoader.h"
 #include "olcAux.h"
 
@@ -122,3 +124,4 @@ namespace olc
 // | END IMAGE LOADER: GDI+                                                       |
 // O------------------------------------------------------------------------------O
 #pragma endregion
+#endif //OLCIMAGELOADER_GDI_H

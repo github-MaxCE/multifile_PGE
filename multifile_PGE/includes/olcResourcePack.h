@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCRESOURCEPACK_H
+#define OLCRESOURCEPACK_H
 #include <stdint.h>
 #include <vector>
 #include <streambuf>
@@ -35,3 +37,4 @@ namespace olc
 		std::string makeposix(const std::string& path);
 	};
 }
+#endif //OLCRESOURCEPACK_H

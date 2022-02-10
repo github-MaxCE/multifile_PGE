@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCIMAGELOADER_LIBPNG_H
+#define OLCIMAGELOADER_LIBPNG_H
 #include "olcImageLoader.h"
 #include "olcAux.h"
 
@@ -125,3 +127,4 @@ namespace olc
 // | END IMAGE LOADER:                                                            |
 // O------------------------------------------------------------------------------O
 #pragma endregion
+#endif //OLCIMAGELOADER_LIBPNG_H

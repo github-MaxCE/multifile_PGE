@@ -1,5 +1,6 @@
-#include "olcPixelGameEngine.h"
 #include "olcPixel.h"
+#include "olcPixelGameEngine.h"
+
 // Override base class with your custom functionality
 class Example : public olc::PixelGameEngine
 {

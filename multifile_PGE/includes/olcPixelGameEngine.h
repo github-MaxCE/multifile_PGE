@@ -499,18 +499,18 @@ namespace X11
 #endif
 #endif
 #pragma endregion
-#include "olcAux.h"
-#include "olcDecal.h"
-#include "olcImageLoader.h"
-#include "olcInput.h"
 #include "olcPGEX.h"
+#include "olcInput.h"
+#include "olcV2D.h"
 #include "olcPixel.h"
+#include "olcResourcePack.h"
+#include "olcSprite.h"
+#include "olcDecal.h"
+#include "olcRenderable.h"
+#include "olcImageLoader.h"
 #include "olcPlatform.h"
 #include "olcRenderer.h"
-#include "olcRenderable.h"
-#include "olcSprite.h"
-#include "olcV2D.h"
-#include "olcResourcePack.h"
+#include "olcAux.h"
 
 // O------------------------------------------------------------------------------O
 // | olcPixelGameEngine INTERFACE DECLARATION                                     |

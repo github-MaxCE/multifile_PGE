@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCPLATFORM_WINAPI_H
+#define OLCPLATFORM_WINAPI_H
 #include "olcPixelGameEngine.h"
 #include "olcPlatform.h"
 #include "olcInput.h"
@@ -213,4 +215,5 @@ namespace olc
 // O------------------------------------------------------------------------------O
 // | END PLATFORM: MICROSOFT WINDOWS XP, VISTA, 7, 8, 10                          |
 // O------------------------------------------------------------------------------O
-#pragma endregion 
+#pragma endregion
+#endif //OLCPLATFORM_WINAPI_H

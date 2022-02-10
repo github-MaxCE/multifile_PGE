@@ -1,7 +1,9 @@
 #pragma once
-#include "olcPixelGameEngine.h"
+#ifndef OLCPLATFORM_EMSCRIPTEN_H
+#define OLCPLATFORM_EMSCRIPTEN_H
 #include "olcInput.h"
 #include "olcPlatform.h"
+#include "olcPixelGameEngine.h"
 
 #pragma region platform_emscripten
 // O------------------------------------------------------------------------------O
@@ -462,4 +464,5 @@ extern "C"
 // O------------------------------------------------------------------------------O
 // | END PLATFORM: Emscripten                                                     |
 // O------------------------------------------------------------------------------O
-#pragma endregion 
+#pragma endregion
+#endif //OLCPLATFORM_EMSCRIPTEN_H

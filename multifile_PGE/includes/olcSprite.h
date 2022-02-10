@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCSPRITE_H
+#define OLCSPRITE_H
 #include <memory>
 #include <stdint.h>
 #include "olcPixel.h"
@@ -43,3 +45,4 @@ namespace olc
 		static std::unique_ptr<olc::ImageLoader> loader;
 	};
 }
+#endif //OLCSPRITE_H

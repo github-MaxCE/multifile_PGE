@@ -30,6 +30,8 @@
     <ClCompile Include="src\olcPixelGameEngine.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\olcRenderer_OGL10.cpp" />
+    <ClCompile Include="src\olcRenderer_OGL33.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\olcPixelGameEngine.h">

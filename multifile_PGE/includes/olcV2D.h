@@ -1,4 +1,7 @@
 #pragma once
+#ifndef OLCV2D_H
+#define OLCV2D_H
+#include <stdint.h>
 #include <ostream>
 #pragma push_macro("min")
 #undef min
@@ -98,3 +101,4 @@ namespace olc
 }
 #pragma pop_macro("min")
 #pragma pop_macro("max")
+#endif //OLCV2D_H

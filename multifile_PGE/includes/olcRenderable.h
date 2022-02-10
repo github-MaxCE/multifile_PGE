@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCRENDERABLE_H
+#define OLCRENDERABLE_H
 #include <stdint.h>
 #include <memory>
 #include "olcSprite.h"
@@ -27,3 +29,4 @@ namespace olc
 		std::unique_ptr<olc::Decal> pDecal = nullptr;
 	};
 }
+#endif //OLCRENDERABLE_Hs

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCPLATFORM_LINUX_H
+#define OLCPLATFORM_GLUT_H
 #include "olcPixelGameEngine.h"
 #include "olcPlatform.h"
 #include "olcInput.h"
@@ -252,4 +254,5 @@ namespace olc
 // O------------------------------------------------------------------------------O
 // | END PLATFORM: LINUX                                                          |
 // O------------------------------------------------------------------------------O
-#pragma endregion 
+#pragma endregion
+#endif //OLCPLATFORM_GLUT_H

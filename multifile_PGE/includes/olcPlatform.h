@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCPLATFORM_H
+#define OLCPLATFORM_H
 #include "olcPixelGameEngine.h"
 #include "olcAux.h"
 #include "olcV2D.h"
@@ -21,3 +23,4 @@ namespace olc
 		static olc::PixelGameEngine* ptrPGE;
 	};
 }
+#endif //OLCPLATFORM_H

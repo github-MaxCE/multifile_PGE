@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCINPUT_H
+#define OLCINPUT_H
 #include <stdint.h>
 
 namespace olc
@@ -38,3 +40,4 @@ namespace olc
 		bool bHeld = false;		// Set true for all frames between pressed and released events
 	};
 }
+#endif //OLCINPUT_Hs

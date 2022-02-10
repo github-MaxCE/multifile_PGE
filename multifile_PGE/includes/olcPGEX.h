@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCPGEX_H
+#define OLCPGEX_H
 
 namespace olc
 {
@@ -22,3 +24,4 @@ namespace olc
 		static PixelGameEngine* pge;
 	};
 }
+#endif //OLCPGEX_H

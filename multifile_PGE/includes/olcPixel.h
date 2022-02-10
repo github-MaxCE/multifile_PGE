@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCPIXEL_H
+#define OLCPIXEL_H
 #include <stdint.h>
 #include "olcAux.h"
 
@@ -50,3 +52,4 @@ namespace olc
 		MAGENTA(255, 0, 255), DARK_MAGENTA(128, 0, 128), VERY_DARK_MAGENTA(64, 0, 64),
 		WHITE(255, 255, 255), BLACK(0, 0, 0), BLANK(0, 0, 0, 0);
 }
+#endif //OLCPIXEL_H

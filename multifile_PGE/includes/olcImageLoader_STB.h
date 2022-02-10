@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCIMAGELOADER_STB_H
+#define OLCIMAGELOADER_STB_H
 #include "olcImageLoader.h"
 #include "olcAux.h"
 
@@ -64,3 +66,4 @@ namespace olc
 // | START IMAGE LOADER: stb_image.h                                              |
 // O------------------------------------------------------------------------------O
 #pragma endregion
+#endif //OLCIMAGELOADER_STB_H

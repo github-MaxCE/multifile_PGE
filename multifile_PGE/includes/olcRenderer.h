@@ -1,8 +1,10 @@
 #pragma once
+#ifndef OLCRENDERER_H
+#define OLCRENDERER_H
 #include <vector>
-#include "olcAux.h"
 #include "olcV2D.h"
 #include "olcDecal.h"
+#include "olcAux.h"
 
 namespace olc
 {
@@ -28,3 +30,4 @@ namespace olc
 		static olc::PixelGameEngine* ptrPGE;
 	};
 }
+#endif //OLCRENDERER_H

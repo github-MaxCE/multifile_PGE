@@ -1,9 +1,11 @@
 #pragma once
-#include <vector>
+#ifndef OLCDECAL_H
+#define OLCDECAL_H
 #include <stdint.h>
+#include <vector>
+#include "olcV2D.h"
 #include "olcPixel.h"
 #include "olcSprite.h"
-#include "olcV2D.h"
 
 namespace olc
 {
@@ -56,3 +58,4 @@ namespace olc
 		uint32_t points = 0;
 	};
 }
+#endif //OLCDECAL_H

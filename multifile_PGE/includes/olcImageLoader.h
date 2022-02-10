@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCIMAGELOADER_H
+#define OLCIMAGELOADER_H
 #include <string>
 #include "olcSprite.h"
 #include "olcAux.h"
@@ -15,3 +17,4 @@ namespace olc
 		virtual olc::rcode SaveImageResource(olc::Sprite* spr, const std::string& sImageFile) = 0;
 	};
 }
+#endif //OLCIMAGELOADER_H

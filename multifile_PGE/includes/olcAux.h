@@ -1,4 +1,6 @@
 #pragma once
+#ifndef OLCV2D_H
+#define OLCV2D_H
 #include <stdint.h>
 #include <vector>
 #include "olcRenderable.h"
@@ -31,3 +33,4 @@ namespace olc
 		std::function<void()> funcHook = nullptr;
 	};
 }
+#endif //OLCV2D_H
