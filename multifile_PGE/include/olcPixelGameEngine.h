@@ -499,6 +499,9 @@ namespace X11
 #endif
 #endif
 #pragma endregion
+#include "olcV2D.h"
+#include "olcAux.h"
+#include "olcPixel.h"
 
 // O------------------------------------------------------------------------------O
 // | olcPixelGameEngine INTERFACE DECLARATION                                     |
@@ -514,60 +517,6 @@ namespace olc
 	};
 	class PixelGameEngine;
 	class Sprite;
-
-	// Pixel Game Engine Advanced Configuration
-	constexpr uint8_t  nMouseButtons = 5;
-	constexpr uint8_t  nDefaultAlpha = 0xFF;
-	constexpr uint32_t nDefaultPixel = (nDefaultAlpha << 24);
-	constexpr uint8_t  nTabSizeInSpaces = 4;
-	enum rcode { FAIL = 0, OK = 1, NO_FILE = -1 };
-
-	// O------------------------------------------------------------------------------O
-	// | olc::Pixel - Represents a 32-Bit RGBA colour                                 |
-	// O------------------------------------------------------------------------------O
-	struct Pixel
-	{
-		union
-		{
-			uint32_t n = nDefaultPixel;
-			struct { uint8_t r; uint8_t g; uint8_t b; uint8_t a; };
-		};
-
-		enum Mode { NORMAL, MASK, ALPHA, CUSTOM };
-
-		Pixel();
-		Pixel(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = nDefaultAlpha);
-		Pixel(uint32_t p);
-		Pixel& operator = (const Pixel& v) = default;
-		bool   operator ==(const Pixel& p) const;
-		bool   operator !=(const Pixel& p) const;
-		Pixel  operator * (const float i) const;
-		Pixel  operator / (const float i) const;
-		Pixel& operator *=(const float i);
-		Pixel& operator /=(const float i);
-		Pixel  operator + (const Pixel& p) const;
-		Pixel  operator - (const Pixel& p) const;
-		Pixel& operator +=(const Pixel& p);
-		Pixel& operator -=(const Pixel& p);
-		Pixel  inv() const;
-	};
-
-	Pixel PixelF(float red, float green, float blue, float alpha = 1.0f);
-	Pixel PixelLerp(const olc::Pixel& p1, const olc::Pixel& p2, float t);
-
-
-	// O------------------------------------------------------------------------------O
-	// | USEFUL CONSTANTS                                                             |
-	// O------------------------------------------------------------------------------O
-	static const Pixel
-		GREY(192, 192, 192), DARK_GREY(128, 128, 128), VERY_DARK_GREY(64, 64, 64),
-		RED(255, 0, 0), DARK_RED(128, 0, 0), VERY_DARK_RED(64, 0, 0),
-		YELLOW(255, 255, 0), DARK_YELLOW(128, 128, 0), VERY_DARK_YELLOW(64, 64, 0),
-		GREEN(0, 255, 0), DARK_GREEN(0, 128, 0), VERY_DARK_GREEN(0, 64, 0),
-		CYAN(0, 255, 255), DARK_CYAN(0, 128, 128), VERY_DARK_CYAN(0, 64, 64),
-		BLUE(0, 0, 255), DARK_BLUE(0, 0, 128), VERY_DARK_BLUE(0, 0, 64),
-		MAGENTA(255, 0, 255), DARK_MAGENTA(128, 0, 128), VERY_DARK_MAGENTA(64, 0, 64),
-		WHITE(255, 255, 255), BLACK(0, 0, 0), BLANK(0, 0, 0, 0);
 
 	// Thanks to scripticuk and others for updating the key maps
 	// NOTE: The GLUT platform will need updating, open to contributions ;)
@@ -603,110 +552,6 @@ namespace olc
 		bool bReleased = false;	// Set once during the frame the event occurs
 		bool bHeld = false;		// Set true for all frames between pressed and released events
 	};
-
-	// O------------------------------------------------------------------------------O
-	// | olc::vX2d - A generic 2D vector type                                         |
-	// O------------------------------------------------------------------------------O
-#if !defined(OLC_IGNORE_VEC2D)
-#pragma push_macro("min")
-#undef min
-#pragma push_macro("max")
-#undef max
-
-	template<class T>
-	struct v2d_generic
-	{
-		T x = 0;
-		T y = 0;
-		v2d_generic() : x(0), y(0) {}
-		v2d_generic(T _x, T _y) : x(_x), y(_y) {}
-		v2d_generic(const v2d_generic& v) : x(v.x), y(v.y) {}
-		v2d_generic& operator=(const v2d_generic& v) = default;
-		T mag() const { return T(std::sqrt(x * x + y * y)); }
-		T mag2() const { return x * x + y * y; }
-		v2d_generic  norm() const { T r = 1 / mag(); return v2d_generic(x * r, y * r); }
-		v2d_generic  perp() const { return v2d_generic(-y, x); }
-		v2d_generic  floor() const { return v2d_generic(std::floor(x), std::floor(y)); }
-		v2d_generic  ceil() const { return v2d_generic(std::ceil(x), std::ceil(y)); }
-		v2d_generic  max(const v2d_generic& v) const { return v2d_generic(std::max(x, v.x), std::max(y, v.y)); }
-		v2d_generic  min(const v2d_generic& v) const { return v2d_generic(std::min(x, v.x), std::min(y, v.y)); }
-		v2d_generic  cart() { return { std::cos(y) * x, std::sin(y) * x }; }
-		v2d_generic  polar() { return { mag(), std::atan2(y, x) }; }
-		v2d_generic&  clamp(const T& xlo, const T& xhi, const T& ylo, const T& yhi) { xclamp(xlo, xhi); yclamp(ylo, yhi); return *this; }
-		v2d_generic&  xclamp(const T& xlo, const T& xhi) { this->x = std::clamp(this->x, xlo, xhi); return *this; }
-		v2d_generic&  yclamp(const T& ylo, const T& yhi) { this->y = std::clamp(this->y, ylo, yhi); return *this; }
-		T dot(const v2d_generic& rhs) const { return this->x * rhs.x + this->y * rhs.y; }
-		T cross(const v2d_generic& rhs) const { return this->x * rhs.y - this->y * rhs.x; }
-		v2d_generic  operator +  (const v2d_generic& rhs) const { return v2d_generic(this->x + rhs.x, this->y + rhs.y); }
-		v2d_generic  operator -  (const v2d_generic& rhs) const { return v2d_generic(this->x - rhs.x, this->y - rhs.y); }
-		v2d_generic  operator +  (const T& rhs) const { return v2d_generic(this->x + rhs, this->y + rhs); }
-		v2d_generic  operator -  (const T& rhs) const { return v2d_generic(this->x - rhs, this->y - rhs); }
-		v2d_generic  operator *  (const T& rhs)		   const { return v2d_generic(this->x * rhs, this->y * rhs); }
-		v2d_generic  operator *  (const v2d_generic& rhs) const { return v2d_generic(this->x * rhs.x, this->y * rhs.y); }
-		v2d_generic  operator /  (const T& rhs)		   const { return v2d_generic(this->x / rhs, this->y / rhs); }
-		v2d_generic  operator /  (const v2d_generic& rhs) const { return v2d_generic(this->x / rhs.x, this->y / rhs.y); }
-		v2d_generic& operator += (const v2d_generic& rhs) { this->x += rhs.x; this->y += rhs.y; return *this; }
-		v2d_generic& operator -= (const v2d_generic& rhs) { this->x -= rhs.x; this->y -= rhs.y; return *this; }
-		v2d_generic& operator *= (const T& rhs) { this->x *= rhs; this->y *= rhs; return *this; }
-		v2d_generic& operator /= (const T& rhs) { this->x /= rhs; this->y /= rhs; return *this; }
-		v2d_generic& operator *= (const v2d_generic& rhs) { this->x *= rhs.x; this->y *= rhs.y; return *this; }
-		v2d_generic& operator /= (const v2d_generic& rhs) { this->x /= rhs.x; this->y /= rhs.y; return *this; }
-		v2d_generic  operator +  () const { return { +x, +y }; }
-		v2d_generic  operator -  () const { return { -x, -y }; }
-		bool operator == (const v2d_generic& rhs) const { return (this->x == rhs.x && this->y == rhs.y); }
-		bool operator != (const v2d_generic& rhs) const { return (this->x != rhs.x || this->y != rhs.y); }
-		const std::string str() const { return std::string("(") + std::to_string(this->x) + "," + std::to_string(this->y) + ")"; }
-		friend std::ostream& operator << (std::ostream& os, const v2d_generic& rhs) { os << rhs.str(); return os; }
-		operator v2d_generic<int32_t>() const { return { static_cast<int32_t>(this->x), static_cast<int32_t>(this->y) }; }
-		operator v2d_generic<float>() const { return { static_cast<float>(this->x), static_cast<float>(this->y) }; }
-		operator v2d_generic<double>() const { return { static_cast<double>(this->x), static_cast<double>(this->y) }; }
-		operator bool() { return mag() != 0; }
-	};
-
-	// Note: joshinils has some good suggestions here, but they are complicated to implement at this moment, 
-	// however they will appear in a future version of PGE
-	template<class T> inline v2d_generic<T> operator * (const float& lhs, const v2d_generic<T>& rhs)
-	{
-		return v2d_generic<T>((T)(lhs * (float)rhs.x), (T)(lhs * (float)rhs.y));
-	}
-	template<class T> inline v2d_generic<T> operator * (const double& lhs, const v2d_generic<T>& rhs)
-	{
-		return v2d_generic<T>((T)(lhs * (double)rhs.x), (T)(lhs * (double)rhs.y));
-	}
-	template<class T> inline v2d_generic<T> operator * (const int& lhs, const v2d_generic<T>& rhs)
-	{
-		return v2d_generic<T>((T)(lhs * (int)rhs.x), (T)(lhs * (int)rhs.y));
-	}
-	template<class T> inline v2d_generic<T> operator / (const float& lhs, const v2d_generic<T>& rhs)
-	{
-		return v2d_generic<T>((T)(lhs / (float)rhs.x), (T)(lhs / (float)rhs.y));
-	}
-	template<class T> inline v2d_generic<T> operator / (const double& lhs, const v2d_generic<T>& rhs)
-	{
-		return v2d_generic<T>((T)(lhs / (double)rhs.x), (T)(lhs / (double)rhs.y));
-	}
-	template<class T> inline v2d_generic<T> operator / (const int& lhs, const v2d_generic<T>& rhs)
-	{
-		return v2d_generic<T>((T)(lhs / (int)rhs.x), (T)(lhs / (int)rhs.y));
-	}
-
-	// To stop dandistine crying...
-	template<class T, class U> inline bool operator < (const v2d_generic<T>& lhs, const v2d_generic<U>& rhs)
-	{
-		return lhs.y < rhs.y || (lhs.y == rhs.y && lhs.x < rhs.x);
-	}
-	template<class T, class U> inline bool operator > (const v2d_generic<T>& lhs, const v2d_generic<U>& rhs)
-	{
-		return lhs.y > rhs.y || (lhs.y == rhs.y && lhs.x > rhs.x);
-	}
-
-	typedef v2d_generic<int32_t> vi2d;
-	typedef v2d_generic<uint32_t> vu2d;
-	typedef v2d_generic<float> vf2d;
-	typedef v2d_generic<double> vd2d;
-#pragma pop_macro("min")
-#pragma pop_macro("max")
-#endif
 
 	// O------------------------------------------------------------------------------O
 	// | olc::ResourcePack - A virtual scrambled filesystem to pack your assets into  |

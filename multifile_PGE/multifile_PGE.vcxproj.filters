@@ -14,6 +14,12 @@
     <ClInclude Include="include\olcPixelGameEngine.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\olcV2D.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\olcAux.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -25,13 +31,16 @@
     <ClCompile Include="src\olcPixel.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\olcDecal.cpp">
+    <ClCompile Include="src\olcResourcePack.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\olcSprite.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\olcRenderable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="include\olcPixel.h">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

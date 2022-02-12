@@ -151,11 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\olcAux.h" />
     <ClInclude Include="include\olcPixelGameEngine.h" />
+    <ClInclude Include="include\olcV2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\olcPixel.h" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\olcDecal.cpp" />
+    <ClCompile Include="src\olcResourcePack.cpp" />
     <ClCompile Include="src\olcPixel.cpp" />
     <ClCompile Include="src\olcPixelGameEngine.cpp" />
     <ClCompile Include="src\olcRenderable.cpp" />
