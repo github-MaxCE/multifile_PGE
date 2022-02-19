@@ -1,12 +1,15 @@
-#pragma once
-#include <algorithm>
-#include <ostream>
+module;
 
 #pragma push_macro("min")
 #undef min
 #pragma push_macro("max")
 #undef max
-namespace olc
+
+export module olc.V2D;
+
+import std.core;
+
+export namespace olc
 {
 	// O------------------------------------------------------------------------------O
 	// | olc::vX2d - A generic 2D vector type                                         |

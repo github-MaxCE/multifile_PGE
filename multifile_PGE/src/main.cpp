@@ -1,12 +1,12 @@
-#define OLC_PGE_APPLICATION
-#include "olcPixelGameEngine.h"
+import olc.xtra;
+import olc.Pixel;
+import olc.PGE;
 
 // Override base class with your custom functionality
 class Example : public olc::PixelGameEngine
 {
 public:
-	Example() :
-		olc::PixelGameEngine()
+	Example()
 	{
 		// Name your application
 		sAppName = "Example";
@@ -15,7 +15,6 @@ public:
 public:
 	bool OnUserCreate() override
 	{
-		// Called once at the start, so create things here
 		return true;
 	}
 
@@ -33,7 +32,7 @@ public:
 int main()
 {
 	Example demo;
-	if (demo.Construct(500, 500, 1, 1))
+	if (demo.Construct(500, 500, 1, 1) == olc::rcode::OK)
 		demo.Start();
 	return 0;
 }
