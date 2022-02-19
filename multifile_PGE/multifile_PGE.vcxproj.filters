@@ -46,7 +46,7 @@
     <ClCompile Include="include\olc\Renderer.ixx">
       <Filter>include</Filter>
     </ClCompile>
-    <ClCompile Include="xtra.ixx">
+    <ClCompile Include="include\olc\xtra.ixx">
       <Filter>include</Filter>
     </ClCompile>
   </ItemGroup>

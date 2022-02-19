@@ -172,7 +172,7 @@
     <ClCompile Include="include\olc\Pixel.ixx" />
     <ClCompile Include="include\olc\Renderer.ixx" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="xtra.ixx" />
+    <ClCompile Include="include\olc\xtra.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
