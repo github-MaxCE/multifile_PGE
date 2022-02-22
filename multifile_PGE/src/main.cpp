@@ -1,3 +1,4 @@
+import <cmath>;
 import olc.xtra;
 import olc.Pixel;
 import olc.PGE;

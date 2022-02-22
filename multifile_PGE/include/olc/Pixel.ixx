@@ -113,6 +113,12 @@ export namespace olc
             return *this;
         }
 
+        uint8_t operator [](size_t i)
+        {
+            i = i > 3 ? 3 : (i < 0 ? 0 : i);
+            return *((uint8_t*)this + i);
+        }
+
         Pixel inv() const
         {
             uint8_t nR = uint8_t(std::min(255, std::max(0, 255 - int(r))));

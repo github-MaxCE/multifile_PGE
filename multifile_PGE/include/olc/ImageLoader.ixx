@@ -3,7 +3,7 @@ export module olc.ImageLoader;
 import std.core;
 import olc.xtra;
 import olc.ResourcePack;
-import olc.Sprite;
+import olc.Pixel;
 
 export namespace olc
 {
@@ -12,7 +12,6 @@ export namespace olc
 	public:
 		ImageLoader() = default;
 		virtual ~ImageLoader() = default;
-		virtual olc::rcode LoadImageResource(olc::Sprite* spr, const std::string& sImageFile, olc::ResourcePack* pack) = 0;
-		virtual olc::rcode SaveImageResource(olc::Sprite* spr, const std::string& sImageFile) = 0;
+		virtual std::vector<std::vector<olc::Pixel>>& LoadImageResource(const std::string& sImageFile, olc::ResourcePack* pack = nullptr) = 0;
 	};
 }

@@ -1,6 +1,5 @@
 export module olc.Sprite;
 
-import <stdint.h>;
 import std.core;
 import std.memory;
 import olc.xtra;
@@ -28,10 +27,16 @@ export namespace olc
 			LoadFromFile(sImageFile, pack);
 		}
 
-		Sprite(int32_t w, int32_t h)
+		Sprite(olc::vu2d size) :
+			Sprite(size.x, size.y)
+		{}
+
+
+		Sprite(uint32_t w, uint32_t h) :
+			width(w),
+			height(h)
 		{
-			width = w;		height = h;
-			pColData.resize(width * height);
+			pColData.clear();
 			pColData.resize(width * height, nDefaultPixel);
 		}
 
@@ -43,14 +48,27 @@ export namespace olc
 		}
 
 	public:
-		olc::rcode LoadFromFile(const std::string& sImageFile, olc::ResourcePack* pack = nullptr)
+		void LoadFromFile(const std::string& sImageFile, olc::ResourcePack* pack = nullptr)
 		{
-			return loader->LoadImageResource(this, sImageFile, pack);
+			auto vec = loader->LoadImageResource(this, sImageFile, pack);
+			height = vec.size();
+			width  = vec[0].size();
+			pColData.clear();
+			for (auto& a : vec)
+				for (auto& b : a)
+					pColData.push_back(b);
 		}
 
 	public:
-		int32_t width = 0;
-		int32_t height = 0;
+		union
+		{
+			olc::vu2d size;
+			struct
+			{
+				uint32_t width = 0;
+				uint32_t height = 0;
+			};
+		};
 		enum class Mode { NORMAL, PERIODIC, CLAMP };
 		enum Flip : uint8_t { NONE, HORIZ, VERT };
 

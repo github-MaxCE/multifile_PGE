@@ -347,6 +347,7 @@ import <cstdint>;
 import std.core;
 import std.memory;
 import std.threading;
+import std.filsystem;
 #pragma endregion
 
 #define PGE_VER 217
@@ -355,20 +356,6 @@ import std.threading;
 // | COMPILER CONFIGURATION ODDITIES                                              |
 // O------------------------------------------------------------------------------O
 #pragma region compiler_config
-#define USE_EXPERIMENTAL_FS
-#if defined(_WIN32)
-#if _MSC_VER >= 1920 && _MSVC_LANG >= 201703L
-#undef USE_EXPERIMENTAL_FS
-#endif
-#endif
-#if defined(__linux__) || defined(__MINGW32__) || defined(__EMSCRIPTEN__) || defined(__FreeBSD__) || defined(__APPLE__)
-#if __cplusplus >= 201703L
-#undef USE_EXPERIMENTAL_FS
-#endif
-#endif
-
-
-import std.filsystem;
 
 #if defined(UNICODE) || defined(_UNICODE)
 #define olcT(s) L##s
@@ -479,14 +466,14 @@ namespace X11
 #pragma endregion
 import olc.xtra;
 import olc.V2D;
+import olc.Platform;
 import olc.Pixel;
 import olc.ResourcePack;
-import olc.Renderer;
-import olc.Sprite;
 import olc.ImageLoader;
-import olc.Platform;
-import olc.PGEX;
+import olc.Sprite;
 import olc.Renderable;
+import olc.Renderer;
+import olc.PGEX;
 
 
 // O------------------------------------------------------------------------------O
@@ -497,9 +484,9 @@ export namespace olc
 {
 	enum FLAG : uint8_t
 	{
-		FULLSCREEN = 0b100,
+		FULLSCREEN = 0b001,
 		VSYNC = 0b010,
-		COHESION = 0b001
+		COHESION = 0b100
 	};
 
 	// Thanks to scripticuk and others for updating the key maps
@@ -663,13 +650,13 @@ export namespace olc
 	public:
 		olc::rcode Construct(int32_t screen_w, int32_t screen_h, int32_t pixel_w, int32_t pixel_h, uint8_t flags = 0b000)
 		{
-			bPixelCohesion = cohesion;
+			bPixelCohesion = flags & olc::FLAGS::COHESION;
 			vScreenSize = { screen_w, screen_h };
 			vInvScreenSize = { 1.0f / float(screen_w), 1.0f / float(screen_h) };
 			vPixelSize = { pixel_w, pixel_h };
 			vWindowSize = vScreenSize * vPixelSize;
-			bFullScreen = full_screen;
-			bEnableVSYNC = vsync;
+			bFullScreen = flags & olc::FLAGS::FULLSCREEN;
+			bEnableVSYNC = flags & olc::FLAGS::VSYNC;
 			vPixel = 2.0f / vScreenSize;
 
 
@@ -2684,7 +2671,7 @@ olc::rcode olc::PixelGameEngine::Start()
 // | olcPixelGameEngine Renderers - the draw-y bits                               |
 // O------------------------------------------------------------------------------O
 #pragma region renderers
-#pragma region renderer_ogl10
+#pragma region ogl10
 // O------------------------------------------------------------------------------O
 // | START RENDERER: OpenGL 1.0 (the original, the best...)                       |
 // O------------------------------------------------------------------------------O
@@ -3123,7 +3110,7 @@ namespace olc
 // | END RENDERER: OpenGL 1.0 (the original, the best...)                         |
 // O------------------------------------------------------------------------------O
 #pragma endregion
-#pragma region renderer_ogl33
+#pragma region ogl33
 // O------------------------------------------------------------------------------O
 // | START RENDERER: OpenGL 3.3 (3.0 es) (sh-sh-sh-shaders....)                   |
 // O------------------------------------------------------------------------------O
@@ -3712,12 +3699,11 @@ namespace olc
 // | olcPixelGameEngine Image loaders                                             |
 // O------------------------------------------------------------------------------O
 #pragma region imageloaders
-#pragma region image_gdi
+#pragma region gdi
 // O------------------------------------------------------------------------------O
 // | START IMAGE LOADER: GDI+, Windows Only, always exists, a little slow         |
 // O------------------------------------------------------------------------------O
 #if defined(OLC_IMAGE_GDI)
-
 
 #define min(a, b) ((a < b) ? a : b)
 #define max(a, b) ((a > b) ? a : b)
@@ -3731,7 +3717,6 @@ namespace olc
 #include <shlwapi.h>
 #undef min
 #undef max
-
 
 #if !defined(__MINGW32__)
 #pragma comment(lib, "gdiplus.lib")
@@ -3788,14 +3773,9 @@ namespace olc
 		{}
 
 
-		olc::rcode LoadImageResource(olc::Sprite* spr, const std::string& sImageFile, olc::ResourcePack* pack) override
+		std::vector<std::vector<olc::Pixel>>& LoadImageResource(const std::string& sImageFile, olc::ResourcePack* pack) override
 		{
-			// clear out existing sprite
-			spr->pColData.clear();
-
-
 			// Open file
-			UNUSED(pack);
 			Gdiplus::Bitmap* bmp = nullptr;
 			if (pack != nullptr)
 			{
@@ -3815,28 +3795,20 @@ namespace olc
 
 
 			if (bmp->GetLastStatus() != Gdiplus::Ok) return olc::rcode::FAIL;
-			spr->width = bmp->GetWidth();
-			spr->height = bmp->GetHeight();
 
+			std::vector<std::vector<olc::Pixel>> spr(bmp->GetHeight(), std::vector<olc::Pixel>(bmp->GetWidth()));
 
-			spr->pColData.resize(spr->width * spr->height);
-
-
-			for (int y = 0; y < spr->height; y++)
-				for (int x = 0; x < spr->width; x++)
+			for (int y = 0; y < bmp->GetHeight(); y++)
+			{
+				for (int x = 0; x < bmp->GetWidth(); x++)
 				{
 					Gdiplus::Color c;
 					bmp->GetPixel(x, y, &c);
-					spr->SetPixel(x, y, olc::Pixel(c.GetRed(), c.GetGreen(), c.GetBlue(), c.GetAlpha()));
+					spr[y][x] = olc::Pixel(c.GetRed(), c.GetGreen(), c.GetBlue(), c.GetAlpha());
 				}
+			}
 			delete bmp;
-			return olc::rcode::OK;
-		}
-
-
-		olc::rcode SaveImageResource(olc::Sprite* spr, const std::string& sImageFile) override
-		{
-			return olc::rcode::OK;
+			return spr;
 		}
 	};
 }
@@ -3845,7 +3817,7 @@ namespace olc
 // | END IMAGE LOADER: GDI+                                                       |
 // O------------------------------------------------------------------------------O
 #pragma endregion
-#pragma region image_libpng
+#pragma region libpng
 // O------------------------------------------------------------------------------O
 // | START IMAGE LOADER: libpng, default on linux, requires -lpng  (libpng-dev)   |
 // O------------------------------------------------------------------------------O
@@ -3866,16 +3838,8 @@ namespace olc
 		ImageLoader_LibPNG() : ImageLoader()
 		{}
 
-
-		olc::rcode LoadImageResource(olc::Sprite* spr, const std::string& sImageFile, olc::ResourcePack* pack) override
+		std::vector<std::vector<olc::Pixel>>& LoadImageResource(const std::string& sImageFile, olc::ResourcePack* pack) override
 		{
-			UNUSED(pack);
-
-
-			// clear out existing sprite
-			spr->pColData.clear();
-
-
 			////////////////////////////////////////////////////////////////////////////
 			// Use libpng, Thanks to Guillaume Cottenceau
 			// https://gist.github.com/niw/5963798
@@ -3884,6 +3848,9 @@ namespace olc
 			png_structp png;
 			png_infop info;
 
+			std::vector<std::vector<olc::Pixel>> spr;
+
+			uint32_t width, height;
 
 			auto loadPNG = [&]()
 			{
@@ -3891,8 +3858,8 @@ namespace olc
 				png_byte color_type;
 				png_byte bit_depth;
 				png_bytep* row_pointers;
-				spr->width = png_get_image_width(png, info);
-				spr->height = png_get_image_height(png, info);
+				width = png_get_image_width(png, info);
+				height = png_get_image_height(png, info);
 				color_type = png_get_color_type(png, info);
 				bit_depth = png_get_bit_depth(png, info);
 				if (bit_depth == 16) png_set_strip_16(png);
@@ -3904,27 +3871,29 @@ namespace olc
 				if (color_type == PNG_COLOR_TYPE_GRAY || color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
 					png_set_gray_to_rgb(png);
 				png_read_update_info(png, info);
-				row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * spr->height);
-				for (int y = 0; y < spr->height; y++) {
+				row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * height);
+				for (int y = 0; y < height; y++) {
 					row_pointers[y] = (png_byte*)malloc(png_get_rowbytes(png, info));
 				}
 				png_read_image(png, row_pointers);
 				////////////////////////////////////////////////////////////////////////////
 				// Create sprite array
-				spr->pColData.resize(spr->width * spr->height);
+
+				spr.resize(height, std::vector<olc::Pixel>(width));
+
 				// Iterate through image rows, converting into sprite format
-				for (int y = 0; y < spr->height; y++)
+				for (int y = 0; y < height; y++)
 				{
 					png_bytep row = row_pointers[y];
-					for (int x = 0; x < spr->width; x++)
+					for (int x = 0; x < width; x++)
 					{
 						png_bytep px = &(row[x * 4]);
-						spr->SetPixel(x, y, Pixel(px[0], px[1], px[2], px[3]));
+						spr[y][x] = olc::Pixel(px[0], px[1], px[2], px[3]);
 					}
 				}
 
 
-				for (int y = 0; y < spr->height; y++) // Thanks maksym33
+				for (int y = 0; y < height; y++) // Thanks maksym33
 					free(row_pointers[y]);
 				free(row_pointers);
 				png_destroy_read_struct(&png, &info, nullptr);
@@ -3963,16 +3932,10 @@ namespace olc
 
 
 		fail_load:
-			spr->width = 0;
-			spr->height = 0;
-			spr->pColData.clear();
+			width = 0;
+			height = 0;
+			spr.clear();
 			return olc::rcode::FAIL;
-		}
-
-
-		olc::rcode SaveImageResource(olc::Sprite* spr, const std::string& sImageFile) override
-		{
-			return olc::rcode::OK;
 		}
 	};
 }
@@ -3981,7 +3944,7 @@ namespace olc
 // | END IMAGE LOADER:                                                            |
 // O------------------------------------------------------------------------------O
 #pragma endregion
-#pragma region image_stb
+#pragma region stb
 // O------------------------------------------------------------------------------O
 // | START IMAGE LOADER: stb_image.h, all systems, very fast                      |
 // O------------------------------------------------------------------------------O
@@ -4007,11 +3970,8 @@ namespace olc
 		{}
 
 
-		olc::rcode LoadImageResource(olc::Sprite* spr, const std::string& sImageFile, olc::ResourcePack* pack) override
+		std::vector<olc::Pixel>& LoadImageResource(const std::string& sImageFile, olc::ResourcePack* pack) override
 		{
-			UNUSED(pack);
-			// clear out existing sprite
-			spr->pColData.clear();
 			// Open file
 			stbi_uc* bytes = nullptr;
 			int w = 0, h = 0, cmp = 0;
@@ -4027,18 +3987,22 @@ namespace olc
 				bytes = stbi_load(sImageFile.c_str(), &w, &h, &cmp, 4);
 			}
 
+			std::vector<std::vector<olc::Pixel>> spr(h, std::vector<olc::Pixel>(w));
 
 			if (!bytes) return olc::rcode::FAIL;
-			spr->width = w; spr->height = h;
-			spr->pColData.resize(spr->width * spr->height);
-			std::memcpy(spr->pColData.data(), bytes, spr->width * spr->height * 4);
+			for (int y = 1; y <= h; y++)
+			{
+				for(int x = 1; x <= w; x++)
+				{
+					olc::Pixel col;
+					for (int i = 0; i < 4; i++)
+					{
+						col[i] = bytes[(x*y) * 4 + i]
+					}
+					spr[y][x] = col;
+				}
+			}
 			delete[] bytes;
-			return olc::rcode::OK;
-		}
-
-
-		olc::rcode SaveImageResource(olc::Sprite* spr, const std::string& sImageFile) override
-		{
 			return olc::rcode::OK;
 		}
 	};
@@ -4054,7 +4018,7 @@ namespace olc
 // | olcPixelGameEngine Platforms                                                 |
 // O------------------------------------------------------------------------------O
 #pragma region platforms
-#pragma region platform_windows
+#pragma region windows
 // O------------------------------------------------------------------------------O
 // | START PLATFORM: MICROSOFT WINDOWS XP, VISTA, 7, 8, 10                        |
 // O------------------------------------------------------------------------------O
@@ -4287,7 +4251,7 @@ namespace olc
 // | END PLATFORM: MICROSOFT WINDOWS XP, VISTA, 7, 8, 10                          |
 // O------------------------------------------------------------------------------O
 #pragma endregion 
-#pragma region platform_linux
+#pragma region linux
 // O------------------------------------------------------------------------------O
 // | START PLATFORM: LINUX                                                        |
 // O------------------------------------------------------------------------------O
@@ -4562,7 +4526,7 @@ namespace olc
 // | END PLATFORM: LINUX                                                          |
 // O------------------------------------------------------------------------------O
 #pragma endregion
-#pragma region platform_glut
+#pragma region glut
 // O------------------------------------------------------------------------------O
 // | START PLATFORM: GLUT (used to make it simple for Apple)                      |
 // O------------------------------------------------------------------------------O
@@ -4906,8 +4870,8 @@ namespace olc {
 // O------------------------------------------------------------------------------O
 // | END PLATFORM: GLUT                                                           |
 // O------------------------------------------------------------------------------O
-#pragma endregion 
-#pragma region platform_emscripten
+#pragma endregion
+#pragma region emscripten
 // O------------------------------------------------------------------------------O
 // | START PLATFORM: Emscripten - Totally Game Changing...                        |
 // O------------------------------------------------------------------------------O
@@ -5169,9 +5133,8 @@ namespace olc
 				Module.canvas.parentNode.style.cssText = Module._olc_EmscriptenShellCss;
 			}
 
-
 			Module._olc_ResizeCanvas();
-
+			
 
 			// observe and react to resizing of the container element
 			var resizeObserver = new ResizeObserver(function(entries) { Module._olc_ResizeCanvas(); }).observe(Module.canvas.parentNode);

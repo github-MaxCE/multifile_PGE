@@ -165,9 +165,9 @@ export namespace olc
 			return true;
 		}
 
-		ResourceBuffer GetFileBuffer(const std::string& sFile)
+		olc::ResourceBuffer GetFileBuffer(const std::string& sFile)
 		{
-			return ResourceBuffer(baseFile, mapFiles[sFile].nOffset, mapFiles[sFile].nSize);
+			return olc::ResourceBuffer(baseFile, mapFiles[sFile].nOffset, mapFiles[sFile].nSize);
 		}
 
 		bool Loaded()
