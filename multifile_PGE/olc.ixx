@@ -1,5 +1,6 @@
 export module olc;
 
+export import olc.ImageLoader;
 export import olc.PGE;
 export import olc.PGEX;
 export import olc.Pixel;

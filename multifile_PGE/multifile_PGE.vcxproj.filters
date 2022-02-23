@@ -48,10 +48,7 @@
       <Filter>module</Filter>
     </ClCompile>
     <ClCompile Include="olc.ixx">
-      <Filter>module</Filter>
+      <Filter>src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\PGEX.cpp" />
   </ItemGroup>
 </Project>
