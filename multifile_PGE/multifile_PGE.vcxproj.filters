@@ -5,49 +5,50 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="include">
+    <Filter Include="module">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\olc\PGE.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\olc\V2D.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\olc\Sprite.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\olc\ResourcePack.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\olc\Platform.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\olc\PGEX.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\olc\Renderable.ixx">
-      <Filter>include</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="include\olc\ImageLoader.ixx">
-      <Filter>include</Filter>
+    <ClCompile Include="modules\olc\ImageLoader.ixx">
+      <Filter>module</Filter>
     </ClCompile>
-    <ClCompile Include="include\olc\Pixel.ixx">
-      <Filter>include</Filter>
+    <ClCompile Include="modules\olc\PGE.ixx">
+      <Filter>module</Filter>
     </ClCompile>
-    <ClCompile Include="include\olc\Renderer.ixx">
-      <Filter>include</Filter>
+    <ClCompile Include="modules\olc\PGEX.ixx">
+      <Filter>module</Filter>
     </ClCompile>
-    <ClCompile Include="include\olc\xtra.ixx">
-      <Filter>include</Filter>
+    <ClCompile Include="modules\olc\Pixel.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\Platform.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\Renderable.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\Renderer.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\ResourcePack.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\Sprite.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\V2D.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\xtra.ixx">
+      <Filter>module</Filter>
+    </ClCompile>
+    <ClCompile Include="olc.ixx">
+      <Filter>module</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
