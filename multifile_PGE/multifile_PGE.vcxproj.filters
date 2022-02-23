@@ -51,4 +51,7 @@
       <Filter>module</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\PGEX.cpp" />
+  </ItemGroup>
 </Project>

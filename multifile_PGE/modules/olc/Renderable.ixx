@@ -4,6 +4,7 @@ import std.core;
 import olc.xtra;
 import olc.ResourcePack;
 import olc.Sprite;
+import olc.PGE;
 
 export namespace olc
 {

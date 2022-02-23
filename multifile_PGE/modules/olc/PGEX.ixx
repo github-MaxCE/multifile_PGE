@@ -1,7 +1,5 @@
 export module olc.PGEX;
 
-import olc.PGE;
-
 namespace olc
 {
 	// O------------------------------------------------------------------------------O

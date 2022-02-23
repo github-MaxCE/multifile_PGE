@@ -48,25 +48,27 @@ export namespace olc
 		}
 
 	public:
-		void LoadFromFile(const std::string& sImageFile, olc::ResourcePack* pack = nullptr)
+		olc::rcode LoadFromFile(const std::string& sImageFile, olc::ResourcePack* pack = nullptr)
 		{
-			auto vec = loader->LoadImageResource(this, sImageFile, pack);
+			auto vec = loader->LoadImageResource(sImageFile, pack);
+			if (vec.empty()) return olc::rcode::FAIL;
 			height = vec.size();
 			width  = vec[0].size();
 			pColData.clear();
 			for (auto& a : vec)
 				for (auto& b : a)
 					pColData.push_back(b);
+			return olc::rcode::OK;
 		}
 
 	public:
 		union
 		{
-			olc::vu2d size;
+			olc::vu2d size = olc::vu2d(0, 0);
 			struct
 			{
-				uint32_t width = 0;
-				uint32_t height = 0;
+				uint32_t width;
+				uint32_t height;
 			};
 		};
 		enum class Mode { NORMAL, PERIODIC, CLAMP };
@@ -88,7 +90,7 @@ export namespace olc
 			modeSample = mode;
 		}
 
-		olc::Pixel GetPixel(int32_t x, int32_t y) const
+		olc::Pixel GetPixel(uint32_t x, uint32_t y) const
 		{
 			if (modeSample == olc::Sprite::Mode::NORMAL)
 			{
@@ -100,13 +102,13 @@ export namespace olc
 			else
 			{
 				if (modeSample == olc::Sprite::Mode::PERIODIC)
-					return pColData[abs(y % height) * width + abs(x % width)];
+					return pColData[uint32_t(abs(int(y % height))) * width + uint32_t(abs(int(x % width)))];
 				else
-					return pColData[std::max(0, std::min(y, height - 1)) * width + std::max(0, std::min(x, width - 1))];
+					return pColData[std::max<uint32_t>(0, std::min<uint32_t>(y, height - 1)) * width + std::max<uint32_t>(0, std::min<uint32_t>(x, width - 1))];
 			}
 		}
 
-		bool  SetPixel(int32_t x, int32_t y, olc::Pixel p)
+		bool  SetPixel(uint32_t x, uint32_t y, olc::Pixel p)
 		{
 			if (x >= 0 && x < width && y >= 0 && y < height)
 			{
@@ -117,20 +119,20 @@ export namespace olc
 				return false;
 		}
 
-		olc::Pixel GetPixel(const olc::vi2d& a) const
+		olc::Pixel GetPixel(const olc::vu2d& a) const
 		{
 			return GetPixel(a.x, a.y);
 		}
 
-		bool  SetPixel(const olc::vi2d& a, olc::Pixel p)
+		bool  SetPixel(const olc::vu2d& a, olc::Pixel p)
 		{
 			return SetPixel(a.x, a.y, p);
 		}
 
 		olc::Pixel Sample(float x, float y) const
 		{
-			int32_t sx = std::min((int32_t)((x * (float)width)), width - 1);
-			int32_t sy = std::min((int32_t)((y * (float)height)), height - 1);
+			uint32_t sx = std::min<uint32_t>((uint32_t)((x * (float)width)), width - 1);
+			uint32_t sy = std::min<uint32_t>((uint32_t)((y * (float)height)), height - 1);
 			return GetPixel(sx, sy);
 		}
 
@@ -145,10 +147,10 @@ export namespace olc
 			float u_opposite = 1 - u_ratio;
 			float v_opposite = 1 - v_ratio;
 
-			olc::Pixel p1 = GetPixel(std::max(x, 0), std::max(y, 0));
-			olc::Pixel p2 = GetPixel(std::min(x + 1, (int)width - 1), std::max(y, 0));
-			olc::Pixel p3 = GetPixel(std::max(x, 0), std::min(y + 1, (int)height - 1));
-			olc::Pixel p4 = GetPixel(std::min(x + 1, (int)width - 1), std::min(y + 1, (int)height - 1));
+			olc::Pixel p1 = GetPixel(std::max<uint32_t>(x, 0), std::max<uint32_t>(y, 0));
+			olc::Pixel p2 = GetPixel(std::min<uint32_t>(x + 1, (int)width - 1), std::max<uint32_t>(y, 0));
+			olc::Pixel p3 = GetPixel(std::max<uint32_t>(x, 0), std::min<uint32_t>(y + 1, (int)height - 1));
+			olc::Pixel p4 = GetPixel(std::min<uint32_t>(x + 1, (int)width - 1), std::min<uint32_t>(y + 1, (int)height - 1));
 
 			return olc::Pixel(
 				(uint8_t)((p1.r * u_opposite + p2.r * u_ratio) * v_opposite + (p3.r * u_opposite + p4.r * u_ratio) * v_ratio),
@@ -169,7 +171,7 @@ export namespace olc
 			return spr;
 		}
 
-		olc::Sprite* Duplicate(const olc::vi2d& vPos, const olc::vi2d& vSize)
+		olc::Sprite* Duplicate(const olc::vu2d& vPos, const olc::vu2d& vSize)
 		{
 			olc::Sprite* spr = new olc::Sprite(vSize.x, vSize.y);
 			for (int y = 0; y < vSize.y; y++)
