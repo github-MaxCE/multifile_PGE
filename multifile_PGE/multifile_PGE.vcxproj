@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -104,14 +104,16 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_CONSOLE;%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./modules</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnableModules>true</EnableModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <AdditionalModuleDependencies>olc=./modules/olc</AdditionalModuleDependencies>
+      <FloatingPointModel />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,11 +128,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./modules</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnableModules>true</EnableModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <TranslateIncludes>true</TranslateIncludes>
+      <AdditionalModuleDependencies>olc=./modules/olc</AdditionalModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,14 +146,17 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./modules</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnableModules>true</EnableModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <AdditionalModuleDependencies>olc=./modules/olc</AdditionalModuleDependencies>
+      <TranslateIncludes>true</TranslateIncludes>
+      <FloatingPointModel />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,20 +166,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\olc\PGEX.ixx" />
-    <ClInclude Include="include\olc\PGE.ixx" />
-    <ClInclude Include="include\olc\Platform.ixx" />
-    <ClInclude Include="include\olc\Renderable.ixx" />
-    <ClInclude Include="include\olc\ResourcePack.ixx" />
-    <ClInclude Include="include\olc\Sprite.ixx" />
-    <ClInclude Include="include\olc\V2D.ixx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="include\olc\ImageLoader.ixx" />
-    <ClCompile Include="include\olc\Pixel.ixx" />
-    <ClCompile Include="include\olc\Renderer.ixx" />
+    <ClCompile Include="modules\olc\ImageLoader.ixx" />
+    <ClCompile Include="modules\olc\PGE.ixx" />
+    <ClCompile Include="modules\olc\PGEX.ixx" />
+    <ClCompile Include="modules\olc\Pixel.ixx" />
+    <ClCompile Include="modules\olc\Platform.ixx" />
+    <ClCompile Include="modules\olc\Renderable.ixx" />
+    <ClCompile Include="modules\olc\Renderer.ixx" />
+    <ClCompile Include="modules\olc\ResourcePack.ixx" />
+    <ClCompile Include="modules\olc\Sprite.ixx" />
+    <ClCompile Include="modules\olc\V2D.ixx" />
+    <ClCompile Include="modules\olc\xtra.ixx" />
+    <ClCompile Include="olc.ixx" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="include\olc\xtra.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
