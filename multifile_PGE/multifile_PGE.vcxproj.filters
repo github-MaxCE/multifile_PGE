@@ -50,5 +50,14 @@
     <ClCompile Include="olc.ixx">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PGEX.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\Decal.ixx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\olc\statics.ixx">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

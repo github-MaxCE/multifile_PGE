@@ -173,6 +173,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="modules\olc\Decal.ixx" />
     <ClCompile Include="modules\olc\ImageLoader.ixx" />
     <ClCompile Include="modules\olc\PGE.ixx" />
     <ClCompile Include="modules\olc\PGEX.ixx" />
@@ -182,10 +183,12 @@
     <ClCompile Include="modules\olc\Renderer.ixx" />
     <ClCompile Include="modules\olc\ResourcePack.ixx" />
     <ClCompile Include="modules\olc\Sprite.ixx" />
+    <ClCompile Include="modules\olc\statics.ixx" />
     <ClCompile Include="modules\olc\V2D.ixx" />
     <ClCompile Include="modules\olc\xtra.ixx" />
     <ClCompile Include="olc.ixx" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\PGEX.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

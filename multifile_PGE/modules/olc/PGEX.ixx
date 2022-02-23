@@ -1,9 +1,8 @@
 export module olc.PGEX;
 
-import olc.PGE;
-
 namespace olc
 {
+	class PixelGameEngine;
 	// O------------------------------------------------------------------------------O
 	// | PGE EXTENSION BASE CLASS - Permits access to PGE functions from extension    |
 	// O------------------------------------------------------------------------------O
@@ -11,7 +10,7 @@ namespace olc
 	{
 		friend class olc::PixelGameEngine;
 	public:
-		PGEX(bool bHook = false) { if (bHook) pge->pgex_Register(this); }
+		PGEX(bool bHook = false);
 
 	protected:
 		virtual void OnBeforeUserCreate() { }
